@@ -104,9 +104,9 @@ $days_of_week = [
 		<table class="table table-bordered">
 			<thead>
 			<tr>
-				<th>étape</th>
-				<th>titre</th>
-				<th>description</th>
+				<th class="col-md-2">étape</th>
+				<th class="col-md-4">titre</th>
+				<th class="col-md-6">description</th>
 			</tr>
 			</thead>
 			<?php
