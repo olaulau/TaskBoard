@@ -60,7 +60,7 @@ $days_of_week = [
         'Monday',
         'Thuesday',
         'Wednesday',
-        'Thusday',
+        'Thursday',
         'Friday',
         'Saturday',
     ],
@@ -80,7 +80,19 @@ $days_of_week = [
 <html>
 	<head>
 		<title>Planning par ordre de délai</title>
-		 <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+		<link rel="stylesheet" href="lib/css/bootstrap.min.css">
+		<style>
+            .table > thead > tr > td.danger, .table > tbody > tr > td.danger, .table > tfoot > tr > td.danger, .table > thead > tr > th.danger, .table > tbody > tr > th.danger, .table > tfoot > tr > th.danger, .table > thead > tr.danger > td, .table > tbody > tr.danger > td, .table > tfoot > tr.danger > td, .table > thead > tr.danger > th, .table > tbody > tr.danger > th, .table > tfoot > tr.danger > th {
+                background-color: #ff6666;
+            }
+            .table > thead > tr > td.warning, .table > tbody > tr > td.warning, .table > tfoot > tr > td.warning, .table > thead > tr > th.warning, .table > tbody > tr > th.warning, .table > tfoot > tr > th.warning, .table > thead > tr.warning > td, .table > tbody > tr.warning > td, .table > tfoot > tr.warning > td, .table > thead > tr.warning > th, .table > tbody > tr.warning > th, .table > tfoot > tr.warning > th {
+                background-color: #f2e18c;
+            }
+            
+            .table > thead > tr > td.success, .table > tbody > tr > td.success, .table > tfoot > tr > td.success, .table > thead > tr > th.success, .table > tbody > tr > th.success, .table > tfoot > tr > th.success, .table > thead > tr.success > td, .table > tbody > tr.success > td, .table > tfoot > tr.success > td, .table > thead > tr.success > th, .table > tbody > tr.success > th, .table > tfoot > tr.success > th {
+                background-color: #b3dba3;
+            }
+        </style> 
 	</head>
 	<body>
 		<h1>Planning par ordre de délai</h1>
@@ -95,20 +107,35 @@ $days_of_week = [
 			<?php
 			foreach ($data2 as $date => $data) {
 			    $date = DateTime::createFromFormat('Y-m-d', $date);
+			    $diff = $date->diff(new DateTime());
+			    $date_class = 'success';
+			    if ($diff->invert === 0) {
+			        $date_class = 'danger';
+			    }
+			    elseif ($diff->d === 0) {
+			        $date_class = 'danger';
+			    }
+			    elseif ($diff->d <= 7) {
+			        $date_class = 'warning';
+			    }
+			    else {
+			        $date_class = 'success';
+			    }
+			    
 			    $date = $date->format('l d F Y');
 			    $date = str_replace($months['en'], $months['fr'], $date);
 			    $date = str_replace($days_of_week['en'], $days_of_week['fr'], $date);
 				?>
-				<tr><td colspan="3"><h3><?= $date ?></h3></td></tr>
+				<tr class="<?= $date_class ?>"><td colspan="3"><h3><?= $date ?></h3></td></tr>
 				<?php
 				foreach ($data as $row) {
-				?>
-				<tr>
-					<td><?= $row['étape'] ?></td>
-					<td><?= $row['titre'] ?></td>
-					<td><?= $row['description'] ?></td>
-				</tr>
-				<?php
+    				?>
+    				<tr>
+    					<td><?= $row['étape'] ?></td>
+    					<td><?= $row['titre'] ?></td>
+    					<td><?= $row['description'] ?></td>
+    				</tr>
+    				<?php
 				}
 			}
 			
