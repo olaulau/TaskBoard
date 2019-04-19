@@ -58,7 +58,7 @@ $days_of_week = [
     'en' => [
         'Sunday',
         'Monday',
-        'Thuesday',
+        'Tuesday',
         'Wednesday',
         'Thursday',
         'Friday',
@@ -91,6 +91,10 @@ $days_of_week = [
             
             .table > thead > tr > td.success, .table > tbody > tr > td.success, .table > tfoot > tr > td.success, .table > thead > tr > th.success, .table > tbody > tr > th.success, .table > tfoot > tr > th.success, .table > thead > tr.success > td, .table > tbody > tr.success > td, .table > tfoot > tr.success > td, .table > thead > tr.success > th, .table > tbody > tr.success > th, .table > tfoot > tr.success > th {
                 background-color: #b3dba3;
+            }
+            h2 {
+                font-weight: bold;
+                text-align: center;
             }
         </style> 
 	</head>
@@ -125,8 +129,18 @@ $days_of_week = [
 			    $date = $date->format('l d F Y');
 			    $date = str_replace($months['en'], $months['fr'], $date);
 			    $date = str_replace($days_of_week['en'], $days_of_week['fr'], $date);
+			    
+			    if ($diff->d === 0) {
+			        ?>
+			        <tr class="<?= $date_class ?>"><td colspan="3"><h2><?= $date ?></h2></td></tr>
+			        <?php
+			    }
+			    else {
+			        ?>
+			        <tr class="<?= $date_class ?>"><td colspan="3"><h3><?= $date ?></h3></td></tr>
+			        <?php
+			    }
 				?>
-				<tr class="<?= $date_class ?>"><td colspan="3"><h3><?= $date ?></h3></td></tr>
 				<?php
 				foreach ($data as $row) {
     				?>
