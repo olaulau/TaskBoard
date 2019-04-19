@@ -80,6 +80,7 @@ $days_of_week = [
 <html>
 	<head>
 		<title>Planning par ordre de délai</title>
+		<meta http-equiv="refresh" content="60" >
 		<link rel="stylesheet" href="lib/css/bootstrap.min.css">
 		<style>
             .table > thead > tr > td.danger, .table > tbody > tr > td.danger, .table > tfoot > tr > td.danger, .table > thead > tr > th.danger, .table > tbody > tr > th.danger, .table > tfoot > tr > th.danger, .table > thead > tr.danger > td, .table > tbody > tr.danger > td, .table > tfoot > tr.danger > td, .table > thead > tr.danger > th, .table > tbody > tr.danger > th, .table > tfoot > tr.danger > th {
