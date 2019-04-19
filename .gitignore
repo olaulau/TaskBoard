@@ -3,3 +3,6 @@ api/uploads/*
 tags
 .idea/*
 vendor/
+/.buildpath
+/.project
+/.settings/

@@ -1,11 +1,42 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "00b50e5ebd2d03b90ef653c95854ecc3",
+    "content-hash": "911f34bb1615a4234e0b5767caef04c4",
     "packages": [
+        {
+            "name": "bcosca/fatfree-core",
+            "version": "3.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bcosca/fatfree-core.git",
+                "reference": "c5aa056d2111e666e87f6129fe633c6a2aeeaae2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bcosca/fatfree-core/zipball/c5aa056d2111e666e87f6129fe633c6a2aeeaae2",
+                "reference": "c5aa056d2111e666e87f6129fe633c6a2aeeaae2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "."
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "description": "A powerful yet easy-to-use PHP micro-framework designed to help you build dynamic and robust Web applications - fast!",
+            "homepage": "http://fatfreeframework.com/",
+            "time": "2018-12-24T13:37:45+00:00"
+        },
         {
             "name": "firebase/php-jwt",
             "version": "1.0.0",
@@ -48,7 +79,7 @@
             ],
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2014-08-28 17:14:17"
+            "time": "2014-08-28T17:14:17+00:00"
         },
         {
             "name": "gabordemooij/redbean",
@@ -89,7 +120,7 @@
             "keywords": [
                 "orm"
             ],
-            "time": "2015-05-09 12:22:47"
+            "time": "2015-05-09T12:22:47+00:00"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -131,7 +162,7 @@
                 "hashing",
                 "password"
             ],
-            "time": "2014-11-20 16:49:30"
+            "time": "2014-11-20T16:49:30+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -192,7 +223,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2015-11-01 10:15:28"
+            "time": "2015-11-01T10:15:28+00:00"
         },
         {
             "name": "slim/slim",
@@ -238,7 +269,7 @@
                 "rest",
                 "router"
             ],
-            "time": "2015-03-08 18:41:17"
+            "time": "2015-03-08T18:41:17+00:00"
         }
     ],
     "packages-dev": [],
