@@ -132,7 +132,7 @@ $days_of_week = [
 			    
 			    if ($diff->d === 0) {
 			        ?>
-			        <tr class="<?= $date_class ?>"><td colspan="3"><h2><?= $date ?></h2></td></tr>
+			        <tr class="<?= $date_class ?>"><td colspan="3"><h2 id="today"><?= $date ?></h2></td></tr>
 			        <?php
 			    }
 			    else {
