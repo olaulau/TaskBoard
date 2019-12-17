@@ -129,6 +129,17 @@ function addUserToBoard($boardId, $user) {
     }
 }
 
+
+// sort object array by a property (as if it was a 2D array)
+function sortObjectsArray (&$array, $property, $reverse=false) {
+	usort($array, function($a, $b) use ($property, $reverse) {
+		if($reverse)
+			return $b->$property <=> $a->$property;
+		else
+			return $a->$property <=> $b->$property;
+	});
+}
+
 // Get all boards.
 function getBoards() {
     $user = getUser();
@@ -148,7 +159,9 @@ function getBoards() {
                     $lane->collapsed = true;
                 }
             }
+            $lane->position = str_pad($lane->position, 2, '0', STR_PAD_LEFT); //add leading zero to fix lazy part of app
         }
+        sortObjectsArray($board->xownLane, 'position'); // force sort by position for other lazy part of app
     }
 
     if ($user->isAdmin) {
