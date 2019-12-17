@@ -5,9 +5,11 @@ $f3 = \Base::instance();
 $db = new DB\SQL('sqlite:./api/taskboard.db');
 
 $sql = '
-	SELECT l.name AS étape, title AS titre, description, due_date as délai
-	FROM item i
-	INNER JOIN lane l ON i.lane_id = l.id';
+	SELECT		l.name AS étape, title AS titre, description, due_date as délai
+	FROM		item i
+	INNER JOIN	lane l ON i.lane_id = l.id
+	ORDER BY	due_date ASC, l.position ASC
+';
 $data = $db->exec($sql);
 
 $data2 = [];
@@ -32,7 +34,7 @@ $months = [
         'April',
         'May',
         'June',
-        'Jully',
+        'July',
         'August',
         'September',
         'October',
@@ -49,6 +51,7 @@ $months = [
         'Juillet',
         'Août',
         'Septembre',
+        'Octobre',
         'Novembre',
         'Décembre',
     ]
@@ -110,17 +113,19 @@ $days_of_week = [
 			</tr>
 			</thead>
 			<?php
+			$today = new DateTime();
+			$today_found = false;
 			foreach ($data2 as $date => $data) {
 			    $date = DateTime::createFromFormat('Y-m-d', $date);
-			    $diff = $date->diff(new DateTime());
+			    $diff = $today->diff($date);
 			    $date_class = 'success';
-			    if ($diff->invert === 0) {
+			    if ($diff->invert === 1) {
 			        $date_class = 'danger';
 			    }
-			    elseif ($diff->d === 0) {
+			    elseif ($diff->format("%a") === "0") {
 			        $date_class = 'danger';
 			    }
-			    elseif ($diff->d <= 7) {
+			    elseif ($diff->format("%a") <= 7) {
 			        $date_class = 'warning';
 			    }
 			    else {
@@ -131,14 +136,17 @@ $days_of_week = [
 			    $date = str_replace($months['en'], $months['fr'], $date);
 			    $date = str_replace($days_of_week['en'], $days_of_week['fr'], $date);
 			    
-			    if ($diff->d === 0) {
+			    if ((!$today_found && $diff->format("%R") === "+") || ($diff->format("%a") === "0")) {
+					$today_found = true;
 			        ?>
-			        <tr class="<?= $date_class ?>"><td colspan="3"><h2 id="today"><?= $date ?></h2></td></tr>
+			        <tr id="today" class="<?= $date_class ?>"><td colspan="3"><h2><?= $date ?> (aujourd'hui)</h2></td></tr>
 			        <?php
 			    }
 			    else {
+			    	$s = $diff->format("%a") > 1 ? 's' : '';
+			    	$qualificatif = $diff->format("%R") === "+" ? "restant$s" : "de retard";
 			        ?>
-			        <tr class="<?= $date_class ?>"><td colspan="3"><h3><?= $date ?></h3></td></tr>
+			        <tr id="" class="<?= $date_class ?>"><td colspan="3"><h3><?= $date ?> (<?= $diff->format("%a") ?> jour<?=$s?> <?=$qualificatif?>)</h3></td></tr>
 			        <?php
 			    }
 				?>
@@ -148,7 +156,7 @@ $days_of_week = [
     				<tr>
     					<td><?= $row['étape'] ?></td>
     					<td><?= $row['titre'] ?></td>
-    					<td><?= $row['description'] ?></td>
+    					<td><?= nl2br(trim(str_replace("\n\n", "\n", $row['description']))) ?></td>
     				</tr>
     				<?php
 				}
